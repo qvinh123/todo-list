@@ -1,0 +1,29 @@
+<div
+  class="container"
+  style="
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 805px;
+    margin: auto;
+  "
+>
+  <div
+    *ngIf="authService.userInfo | async"
+    style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      width: 100%;
+    "
+  >
+    <h2>Todo List</h2>
+    <button (click)="onLogout()" mat-raised-button color="primary">
+      Logout
+    </button>
+  </div>
+  <router-outlet></router-outlet>
+</div>

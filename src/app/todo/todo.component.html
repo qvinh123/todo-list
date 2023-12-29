@@ -1,0 +1,41 @@
+<div class="todo">
+  <div
+    class="todo-header"
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 25px;
+    "
+  >
+    <mat-form-field
+      appearance="outline"
+      style="width: 350px; margin-right: 15px; height: 40px"
+    >
+      <input matInput placeholder="Enter text..." [(ngModel)]="content" />
+    </mat-form-field>
+
+    <button
+      [disabled]="!content"
+      mat-raised-button
+      color="primary"
+      (click)="onAddTodo()"
+    >
+      ADD
+    </button>
+  </div>
+  <div class="todo-body">
+    <ag-grid-angular
+      (gridReady)="fetchTodos()"
+      (cellClicked)="onCellClicked($event)"
+      (cellValueChanged)="onUpdateTodo($event)"
+      [paginationPageSizeSelector]="paginationPageSizeSelector"
+      [paginationPageSize]="paginationPageSize"
+      class="ag-theme-quartz"
+      style="height: 600px; width: 805px"
+      [rowData]="rowData"
+      [columnDefs]="colDefs"
+      [pagination]="true"
+    ></ag-grid-angular>
+  </div>
+</div>

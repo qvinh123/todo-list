@@ -1,0 +1,74 @@
+<form class="login-form-flex" [formGroup]="form">
+  <mat-card style="width: 350px; padding: 10px 0">
+    <mat-card-title style="text-align: center; margin-bottom: 10px">
+      {{ mode ? "Login" : "Sign up" }}
+    </mat-card-title>
+    <mat-card-content>
+      <mat-form-field style="width: 100%" appearance="outline">
+        <input
+          [formControlName]="nameControls.email"
+          matInput
+          placeholder="Email"
+        />
+        @if (isControlValid(nameControls.email)) {
+        <mat-error> {{ messageErrorOfControl(nameControls.email) }}</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field style="width: 100%" appearance="outline">
+        <input
+          type="password"
+          matInput
+          placeholder="Password"
+          [formControlName]="nameControls.password"
+        />
+        @if (isControlValid(nameControls.password)) {
+        <mat-error>
+          {{ messageErrorOfControl(nameControls.password) }}</mat-error
+        >
+        }
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%" appearance="outline" *ngIf="!mode">
+        <input
+          type="password"
+          matInput
+          placeholder="Confirm Password"
+          [formControlName]="nameControls.confirmPassword"
+        />
+        @if (isControlValid(nameControls.confirmPassword)) {
+        <mat-error>
+          {{ messageErrorOfControl(nameControls.confirmPassword) }}</mat-error
+        >
+        }
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions
+      style="justify-content: center; display: block; padding: 0 16px"
+    >
+      <div class="button-flex-container">
+        <button
+          style="width: 100%; margin-bottom: 10px"
+          (click)="onSubmit()"
+          [disabled]="!form.valid"
+          mat-raised-button
+          color="primary"
+        >
+          {{ mode ? "Login" : "Sign up" }}
+        </button>
+      </div>
+      <p style="text-align: center">
+        {{ !mode ? " Need an account?" : "Already a user?" }}
+        <a
+          (click)="onSwitchMode()"
+          style="
+            cursor: pointer;
+            color: steelblue;
+            text-decoration: underline;
+            text-transform: uppercase;
+          "
+          >{{ !mode ? " SIGN UP" : " LOGIN" }}</a
+        >
+      </p>
+    </mat-card-actions>
+  </mat-card>
+</form>
